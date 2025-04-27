@@ -9,11 +9,11 @@ fi
 if [[ -n "$languages" ]]; then
   for language in $languages; do
     case $language in
-    "Ruby on Rails")
+    Ruby)
       mise use --global ruby@latest
       mise x ruby -- gem install rails --no-document
       ;;
-    "Node.js")
+    Node.js)
       mise use --global node@lts
       ;;
     Go)
