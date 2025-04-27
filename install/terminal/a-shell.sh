@@ -2,6 +2,9 @@
 [ -f "~/.bashrc" ] && mv ~/.bashrc ~/.bashrc.bak
 cp ~/.local/share/omakub/configs/bashrc ~/.bashrc
 
+# Install bash-completion
+brew install bash-completion@2
+
 # Load the PATH for use later in the installers
 source ~/.local/share/omakub/defaults/bash/shell
 

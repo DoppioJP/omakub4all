@@ -5,9 +5,6 @@ HISTSIZE=32768
 HISTFILESIZE="${HISTSIZE}"
 
 # Autocompletion
-# Install bash-completion
-brew install bash-completion@2
-
 # Source bash-completion using Homebrew's recommended syntax
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
