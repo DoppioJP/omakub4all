@@ -74,7 +74,10 @@ fi
 echo "Cloning Omakub..."
 rm -rf ~/.local/share/omakub
 git clone https://github.com/DoppioJP/omakub4all.git ~/.local/share/omakub >/dev/null
-OMAKUB_REF="$PLATFORM"
+
+# Allow for preassigned OMAKUB_REF or use detected platform
+[ -z "${OMAKUB_REF}" ] && OMAKUB_REF="$PLATFORM"
+
 if [[ $OMAKUB_REF != "master" ]]; then
 	cd ~/.local/share/omakub
 	git fetch origin "${OMAKUB_REF:-stable}" && git checkout "${OMAKUB_REF:-stable}"
@@ -82,4 +85,4 @@ if [[ $OMAKUB_REF != "master" ]]; then
 fi
 
 echo "Starting Omakub for $PLATFORM installation..."
-# bash ~/.local/share/omakub/$PLATFORM/install.sh
+bash ~/.local/share/omakub/install.sh
