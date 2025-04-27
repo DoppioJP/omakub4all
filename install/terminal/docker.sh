@@ -1,15 +1,25 @@
-# Add the official Docker repo
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/ubuntu/gpg
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
+# Check if Docker is already installed via Homebrew
+if brew list --cask docker &>/dev/null; then
+  echo "Docker is installed via Homebrew. Checking for updates..."
+  brew upgrade --cask docker
+else
+  # Check if Docker.app exists anywhere (could be in a custom location)
+  # First try to find it using mdfind (macOS Spotlight)
+  if mdfind "kMDItemCFBundleIdentifier == 'com.docker.docker'" | grep -q ".app"; then
+    echo "Docker.app found, but not managed by Homebrew."
+    echo "Please use Docker Desktop's built-in update mechanism instead."
+  else
+    echo "Installing Docker..."
+    brew install --cask docker
+  fi
+fi
 
-# Install Docker engine and standard plugins
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-
-# Give this user privileged Docker access
-sudo usermod -aG docker ${USER}
-
-# Limit log size to avoid running out of disk
-echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
+# Ensure Docker CLI is available
+if ! command -v docker &> /dev/null; then
+  echo "Docker CLI not found. Please make sure Docker Desktop is properly installed and running."
+else
+  # Display current Docker version
+  echo "Docker installation verified:"
+  docker --version
+  docker compose version
+fi

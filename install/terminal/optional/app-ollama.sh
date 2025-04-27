@@ -1,1 +1,1 @@
-curl -fsSL https://ollama.com/install.sh | sh
+brew install --cask ollama
