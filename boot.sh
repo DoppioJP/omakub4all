@@ -73,7 +73,7 @@ fi
 
 echo "Cloning Omakub..."
 rm -rf ~/.local/share/omakub
-git clone https://github.com/basecamp/omakub.git ~/.local/share/omakub >/dev/null
+git clone https://github.com/DoppioJP/omakub4all.git ~/.local/share/omakub >/dev/null
 OMAKUB_REF="$PLATFORM"
 if [[ $OMAKUB_REF != "master" ]]; then
 	cd ~/.local/share/omakub
