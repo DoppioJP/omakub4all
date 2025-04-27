@@ -1,1 +1,1 @@
-sudo apt install -y xournalpp
+brew install --cask xournal++

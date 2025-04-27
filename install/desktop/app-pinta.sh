@@ -1,2 +1,2 @@
-# FIXME: Get this out of snap
-sudo snap install pinta
+# Alternative to Pinta - Krita
+brew install --cask krita

@@ -1,1 +1,1 @@
-sudo apt install -y vlc
+brew install --cask vlc

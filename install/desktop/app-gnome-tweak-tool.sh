@@ -1,1 +1,1 @@
-sudo apt install -y gnome-tweak-tool
+# gnome-tweak-tool not needed on macOS
