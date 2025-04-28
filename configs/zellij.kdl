@@ -1,6 +1,7 @@
 theme "tokyo-night"
 default_layout "compact"
 on_force_close "quit"
+default_shell "bash"
 
 default_mode "locked"
 keybinds clear-defaults=true {
