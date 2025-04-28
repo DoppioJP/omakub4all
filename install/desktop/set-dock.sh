@@ -92,7 +92,6 @@ add_app_to_dock "$UTIL_DIR/Chromium.app" || add_app_to_dock "$APP_DIR/Chromium.a
 add_app_to_dock "$UTIL_DIR/Brave Browser.app" || add_app_to_dock "$APP_DIR/Brave Browser.app" || add_app_to_dock "/Applications/Brave Browser.app"
 
 # Terminal and development tools
-add_app_to_dock "$HOME/Applications/AlacrittyLauncher.app" || add_app_to_dock "$UTIL_DIR/Alacritty.app" || add_app_to_dock "$APP_DIR/Alacritty.app"
 add_app_to_dock "$HOME/Applications/Neovim.app" || add_app_to_dock "$APP_DIR/Neovim.app"
 add_app_to_dock "$UTIL_DIR/Visual Studio Code.app" || add_app_to_dock "$APP_DIR/Visual Studio Code.app"
 add_app_to_dock "$UTIL_DIR/Docker.app" || add_app_to_dock "$APP_DIR/Docker.app"
