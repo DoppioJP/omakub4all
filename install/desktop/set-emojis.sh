@@ -1,3 +1,1 @@
-cp ~/.local/share/omakub/configs/xcompose ~/.XCompose
-ibus restart
-gsettings set org.gnome.desktop.input-sources xkb-options "['compose:caps']"
+# FIXME: macOS has text replacment in System Settings. For now ctrl+cmd+space opens popup with emojis
