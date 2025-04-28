@@ -21,5 +21,4 @@ else
   # Display current Docker version
   echo "Docker installation verified:"
   docker --version
-  docker compose version
 fi
