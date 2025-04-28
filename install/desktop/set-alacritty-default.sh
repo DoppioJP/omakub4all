@@ -1,14 +1,73 @@
 #!/usr/bin/env sh
 
-# This script is a macOS-compatible version of the Linux script for setting Alacritty as default
-# and adding it to file manager context menus.
+# Make alacritty default terminal emulator
+sudo update-alternatives --set x-terminal-emulator /usr/bin/alacritty
 
-# On macOS, these features are not necessary or handled differently:
-# 1. Default terminal emulator: macOS doesn't have a system-wide setting for this
-# 2. Context menu: macOS uses different mechanisms for context menus
+# Adding alacritty to nautilus contextual menu requires the python wrapper for the libraries
+sudo apt install -y python3-nautilus
+mkdir -p ~/.local/share/nautilus-python/extensions/
 
-echo "Setting Alacritty as default terminal is not applicable on macOS."
-echo "macOS handles terminal applications differently than Linux."
+cat > ~/.local/share/nautilus-python/extensions/open-alacritty.py <<TECHNICALLYNOTACONFIGSOHEREDOCCEDITIS
+import os
+from urllib.parse import unquote
+from gi.repository import Nautilus, GObject
+from typing import List
 
-# No action needed for macOS
-exit 0
+class OpenTerminalExtension(GObject.GObject, Nautilus.MenuProvider):
+    def _open_terminal(self, file: Nautilus.FileInfo) -> None:
+        filename = unquote(file.get_uri()[7:])
+
+        os.chdir(filename)
+        os.system("alacritty")
+
+    def menu_activate_cb(
+        self,
+        menu: Nautilus.MenuItem,
+        file: Nautilus.FileInfo,
+    ) -> None:
+        self._open_terminal(file)
+
+    def menu_background_activate_cb(
+        self,
+        menu: Nautilus.MenuItem,
+        file: Nautilus.FileInfo,
+    ) -> None:
+        self._open_terminal(file)
+
+    def get_file_items(
+        self,
+        files: List[Nautilus.FileInfo],
+    ) -> List[Nautilus.MenuItem]:
+        if len(files) != 1:
+            return []
+
+        file = files[0]
+        if not file.is_directory() or file.get_uri_scheme() != "file":
+            return []
+
+        item = Nautilus.MenuItem(
+            name="NautilusPython::openterminal_file_item",
+            label="Open in Alacritty",
+            tip="Open Alacritty In %s" % file.get_name(),
+        )
+        item.connect("activate", self.menu_activate_cb, file)
+
+        return [
+            item,
+        ]
+
+    def get_background_items(
+        self,
+        current_folder: Nautilus.FileInfo,
+    ) -> List[Nautilus.MenuItem]:
+        item = Nautilus.MenuItem(
+            name="NautilusPython::openterminal_file_item2",
+            label="Open in Alacritty",
+            tip="Open Alacritty In %s" % current_folder.get_name(),
+        )
+        item.connect("activate", self.menu_background_activate_cb, current_folder)
+
+        return [
+            item,
+        ]
+TECHNICALLYNOTACONFIGSOHEREDOCCEDITIS
