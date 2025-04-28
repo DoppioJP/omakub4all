@@ -4,11 +4,11 @@ THEME=$(gum choose "${THEME_NAMES[@]}" "<< Back" --header "Choose your theme" --
 if [ -n "$THEME" ] && [ "$THEME" != "<<-back" ]; then
   cp $OMAKUB_PATH/themes/$THEME/alacritty.toml ~/.config/alacritty/theme.toml
   cp $OMAKUB_PATH/themes/$THEME/zellij.kdl ~/.config/zellij/themes/$THEME.kdl
-  sed -i "s/theme \".*\"/theme \"$THEME\"/g" ~/.config/zellij/config.kdl
+  sed -i '' "s/theme \".*\"/theme \"$THEME\"/g" ~/.config/zellij/config.kdl
   cp $OMAKUB_PATH/themes/$THEME/neovim.lua ~/.config/nvim/lua/plugins/theme.lua
 
-  source $OMAKUB_PATH/themes/$THEME/gnome.sh
-  source $OMAKUB_PATH/themes/$THEME/tophat.sh
+  source $OMAKUB_PATH/themes/$THEME/macos.sh
+  # source $OMAKUB_PATH/themes/$THEME/tophat.sh # linux only
   source $OMAKUB_PATH/themes/$THEME/vscode.sh
 
   # Forgo setting the Chrome theme until we might find a less disruptive way of doing it.
