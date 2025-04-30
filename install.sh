@@ -10,9 +10,6 @@ source ~/.local/share/omakub/install/check-version.sh
 # Ask for app choices
 echo "Get ready to make a few choices..."
 source ~/.local/share/omakub/install/terminal/required/app-gum.sh >/dev/null
-
-# Trick Omakub to allow for desktop software installation
-export XDG_CURRENT_DESKTOP=GNOME
 source ~/.local/share/omakub/install/first-run-choices.sh
 
 # Desktop software and tweaks will only be installed if we're running Gnome
