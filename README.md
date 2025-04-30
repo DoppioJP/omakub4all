@@ -1,19 +1,46 @@
-# Omakub
+# Omakub for All!
 
-Turn a fresh Ubuntu installation into a fully-configured, beautiful, and modern web development system by running a single command. That's the one-line pitch for Omakub. No need to write bespoke configs for every essential tool just to get started or to be up on all the latest command-line tools. Omakub is an opinionated take on what Linux can be at its best.
+We all know the one-line pitch for Omakub:
+> Turn a fresh Ubuntu installation into a fully-configured, beautiful, and modern web development system by running a single command.
 
-Watch the introduction video and read more at [omakub.org](https://omakub.org).
+It is amazing. It is beautiful, useful, aesthetically pleasing. There is a catch though: "Ubuntu on x86 only".
 
-## Contributing to the documentation
+The goal in this very fork is to bring Omakub to other 3 platforms:
+- Ubuntu on ARM
+- macOS on ARM
+- macOS on x86
 
-Please help us improve Omakub's documentation on the [basecamp/omakub-site repository](https://github.com/basecamp/omakub-site).
+## Why?
 
-## License
+While I could take all my Apple computers, sell them and get a Framework laptop - it didn't happen yet. In the meantime I want to try experiencing Omakub setup. Here are the options:
+1. Take an old Apple laptop with x86 processor and install Ubuntu Linux on it.
 
-Omakub is released under the [MIT License](https://opensource.org/licenses/MIT).
+   Works like a charm. Only need to add more memory and SSD...
+   
+2. M series (Apple Silicon, a.k.a ARM) laptop with a lot of memory. Why not use that power and have Omakub based development environment fly?
 
-## Extras
+   a. VirtualBox with Ubuntu Linux - with some tweeks it works super nice
+   
+      Currently achieved working version in https://github.com/DoppioJP/omakub-arm, but it is based on an older Omakub 1.1.3 from Aug 2024 (200 commits behind)
 
-While omakub is purposed to be an opinionated take, the open source community offers alternative customization, add-ons, extras, that you can use to adjust, replace or enrich your experience.
+   b. Direct setup on macOS
 
-[⇒ Browse the omakub extensions.](EXTENSIONS.md)
+      Ubuntu Linux on VirtualBox works well, but that can be sometimes moody. VirtualBox crashes, access to host files not always works as intended.
+      Having on macOS at least the Terminal (Alacritty + Zellij) development environment with the beautiful theme could be something already.
+      That is what this fork aims for, especially in the [`macos-tui`](https://github.com/DoppioJP/omakub4all/tree/macos-tui) branch.
+
+      Not everything will get installed if we only do the `terminal` installation, because the Alacritty part is within the `desktop` part. [`macos`](https://github.com/DoppioJP/omakub4all/tree/macos) branch installs everything proposed in the Omakase way. 
+
+4. macOS on Intel
+
+   I haven't tried that yet, but thanks to relying on [Homebrew](https://brew.sh) package manager for macOS, it should just work from `macos*` branches. 
+
+## To do
+
+- [ ] Add some basic settings for Alacritty + Zellij which are needed to have it usable on macOS due to a different behaviour of tiling. For now opening full screen with font-size 16 is the best solution
+- [ ] Move [omakub-arm](https://github.com/DoppioJP/omakub-arm) to [`ubuntu-arm`](https://github.com/DoppioJP/omakub4all/tree/ubuntu-arm) branch after rebasing
+- [ ] Make [`macos-tui`](https://github.com/DoppioJP/omakub4all/tree/macos-tui) complete with all necessary desktop apps included
+- [ ] Possibly there will be no need for separa `macos` and `macos-tui` branches. Relying on env variable `OMAKUB_MACOS_TUI_ONLY` might be enough
+- [ ] Figure out how the rebase to the latest Omakub will work
+- [ ] Make it an extension for Omakub
+
